@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-const Searchbar = ({ onChangeQuery, query }) => {
-  const [input, setInput] = useState("");
+const Searchbar = ({ onChangeQuery }) => {
+  const [input, setInput] = useState('');
 
-  const HandleChangeInput = (e) => {
+  const HandleChangeInput = e => {
     setInput(e.currentTarget.value);
   };
 
-  const HandleSubmit = (e) => {
+  const HandleSubmit = e => {
     e.preventDefault();
     onChangeQuery(input);
-    setInput("");
+    setInput('');
   };
 
   return (

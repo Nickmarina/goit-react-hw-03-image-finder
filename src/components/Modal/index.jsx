@@ -1,10 +1,10 @@
-import "../../styles.scss";
+import '../../styles.scss';
 
-const Modal = ({ imgUrl, tags, onClose }) => {
+const Modal = ({ url, alt, onClose }) => {
   return (
     <div className="Overlay" onClick={onClose}>
       <div className="Modal">
-        <img src={imgUrl} width="800" alt={tags} />
+        <img src={url} width="800" alt={alt} />
       </div>
     </div>
   );
