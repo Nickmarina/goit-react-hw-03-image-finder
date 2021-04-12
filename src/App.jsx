@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { fetchPictures } from "./services/galleryApi";
 import Searchbar from "./components/Searchbar";
 import ImageGallery from "./components/ImageGallery";
-import { fetchPictures } from "./services/galleryApi";
+import PageLoader from "./components/Loader";
 import "./styles.css";
 
 const App = () => {
@@ -9,7 +10,6 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [gallery, setGallery] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState();
 
   const HandleChangeQuery = (newQuery) => {
     setQuery(newQuery);
@@ -25,14 +25,12 @@ const App = () => {
 
   useEffect(() => {
     if (!query) return;
-
     setIsLoading(true);
 
     fetchPictures(query, page)
       .then((data) => {
         setGallery(data);
       })
-      .catch((error) => setError(error.message))
       .finally(() => setIsLoading(false));
   }, [query]);
 
@@ -40,13 +38,7 @@ const App = () => {
     <>
       <Searchbar onChangeQuery={HandleChangeQuery} query={query} />
       <main>
-        {error && (
-          <p>
-            {error} <button onClick={() => setError(undefined)}>x</button>
-          </p>
-        )}
-
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <PageLoader />}
         <ImageGallery gallery={gallery} />
       </main>
     </>

@@ -39,6 +39,18 @@ img {
 /*
  * Стили компонента Searchbar
  */
+
+main {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.Loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
 .Searchbar {
   top: 0;
   left: 0;
