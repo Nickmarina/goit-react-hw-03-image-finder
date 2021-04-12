@@ -1,5 +1,11 @@
-import "../../styles.css";
+import "../../styles.scss";
+import { useState } from "react";
+import Modal from "../Modal";
+
 const ImageGallery = ({ gallery }) => {
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => setShowModal((prev) => !prev);
+
   return (
     <ul className="ImageGallery">
       {gallery.map(({ id, webformatURL, largeImageURL, tags }) => (
@@ -8,7 +14,11 @@ const ImageGallery = ({ gallery }) => {
             src={webformatURL}
             alt={tags}
             className="ImageGalleryItem-image"
-          ></img>
+            onClick={toggleModal}
+          />
+          {showModal && (
+            <Modal imgUrl={largeImageURL} tags={tags} onClose={toggleModal} />
+          )}
         </li>
       ))}
     </ul>

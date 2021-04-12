@@ -3,7 +3,8 @@ import { fetchPictures } from "./services/galleryApi";
 import Searchbar from "./components/Searchbar";
 import ImageGallery from "./components/ImageGallery";
 import PageLoader from "./components/Loader";
-import "./styles.css";
+import Button from "./components/Button";
+import "./styles.scss";
 
 const App = () => {
   const [query, setQuery] = useState("");
@@ -13,15 +14,12 @@ const App = () => {
 
   const HandleChangeQuery = (newQuery) => {
     setQuery(newQuery);
+    setGallery([]);
   };
 
   const HandleChangePage = () => {
-    setPage((prev) => prev + 1);
+    setPage((prev) => (prev += 1));
   };
-
-  // useEffect(() => {
-  //   setPage(1);
-  // }, [query]);
 
   useEffect(() => {
     if (!query) return;
@@ -29,10 +27,10 @@ const App = () => {
 
     fetchPictures(query, page)
       .then((data) => {
-        setGallery(data);
+        setGallery((prev) => [...prev, ...data]);
       })
       .finally(() => setIsLoading(false));
-  }, [query]);
+  }, [query, page]);
 
   return (
     <>
@@ -40,6 +38,9 @@ const App = () => {
       <main>
         {isLoading && <PageLoader />}
         <ImageGallery gallery={gallery} />
+        {gallery.length > 1 && (
+          <Button onClick={HandleChangePage} page={page} />
+        )}
       </main>
     </>
   );
