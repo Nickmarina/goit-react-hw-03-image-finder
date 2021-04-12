@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 const Searchbar = ({ onChangeQuery }) => {
@@ -33,4 +34,7 @@ const Searchbar = ({ onChangeQuery }) => {
   );
 };
 
+Searchbar.propTypes = {
+  onChangeQuery: PropTypes.func.isRequired,
+};
 export default Searchbar;

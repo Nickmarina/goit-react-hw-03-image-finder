@@ -34,7 +34,7 @@ const App = () => {
 
   return (
     <>
-      <Searchbar onChangeQuery={HandleChangeQuery} query={query} />
+      <Searchbar onChangeQuery={HandleChangeQuery} />
       <main>
         {isLoading && <PageLoader />}
         <ImageGallery gallery={gallery} />

@@ -1,4 +1,5 @@
 import '../../styles.scss';
+import PropTypes from 'prop-types';
 
 const Modal = ({ url, alt, onClose }) => {
   return (
@@ -8,6 +9,12 @@ const Modal = ({ url, alt, onClose }) => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  url: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default Modal;

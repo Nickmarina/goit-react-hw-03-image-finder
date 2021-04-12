@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import Modal from '../Modal';
 import '../../styles.scss';
 
@@ -30,6 +31,10 @@ const ImageGallery = ({ gallery }) => {
       ))}
     </ul>
   );
+};
+
+ImageGallery.propTypes = {
+  gallery: PropTypes.array.isRequired,
 };
 
 export default ImageGallery;
